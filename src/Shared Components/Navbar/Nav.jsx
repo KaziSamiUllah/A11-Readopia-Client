@@ -46,7 +46,7 @@ const Nav = () => {
               {NavLinks}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl briem-hand gap-0">
+          <a className="btn btn-ghost text-xl briem-hand gap-0 ">
             <img
               className="w-8 bg-orange-300 rounded-xl mr-2"
               src="https://i.ibb.co/Rg37txC/icons8-book-stack-100.png"
@@ -58,13 +58,13 @@ const Nav = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{NavLinks}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end gap-5">
           <input
             type="checkbox"
             value="luxury"
             className="toggle theme-controller bg-orange-300 border-sky-400 [--tglbg:theme(colors.sky.500)] checked:bg-lime-50 checked:border-blue-800 checked:[--tglbg:theme(colors.blue.900)] row-start-1 col-start-1 col-span-2"
           />
-          <a className="btn">Login</a>
+          <Link to="/login" className="btn">Login</Link>
         </div>
       </div>
     </div>
