@@ -1,9 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Login = () => {
+    const { SingIn } = useContext(AuthContext)
   const Navigate = useNavigate();
   const location = useLocation();
   const [showPass, setShowPass] = useState(false);
@@ -18,13 +20,20 @@ const Login = () => {
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
+
+    SingIn(email, password)
+    .then((user)=>{
+        console.log(user)
+    })
+    .catch(error=>{
+        console.log(error)
+    })
+
   };
 
   const handleGoogleLogIn = () => {};
 
 
-
-  
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">

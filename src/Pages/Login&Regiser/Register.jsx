@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Register = () => {
+
+ const {SignUp, user} = useContext(AuthContext);
+console.log(user)
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -10,7 +15,18 @@ const Register = () => {
     const password = form.get("password");
     const name = form.get("name");
     const url = form.get("url");
+
+    const userData = {email, password, name, url}
+    console.log(userData )
+
+    SignUp(email, password)
+    .then(()=>{
+        alert("user sign up")
+    })
+    .catch(error =>(console.error(error)));
   };
+
+
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -65,9 +81,9 @@ const Register = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Sign in
+                  Sign Up
                 </button>
                 <h2 className="text-black">
                   Already have an account?{" "}
