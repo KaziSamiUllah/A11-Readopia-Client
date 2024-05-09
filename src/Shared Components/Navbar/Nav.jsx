@@ -3,10 +3,18 @@ import { Link } from "react-router-dom";
 const Nav = () => {
   const NavLinks = (
     <>
-      <li><Link>Home</Link></li>
-      <li><Link>All Books</Link></li>
-      <li><Link>Add books</Link></li>
-     
+      <li>
+        <Link>Home</Link>
+      </li>
+      <li>
+        <Link to="/allBooks">All Books</Link>
+      </li>
+      <li>
+        <Link to="/addBooks">Add books</Link>
+      </li>
+      <li>
+        <Link to="borrowedBooks">Borrowed Books</Link>
+      </li>
     </>
   );
 
@@ -38,15 +46,25 @@ const Nav = () => {
               {NavLinks}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Readopia</a>
+          <a className="btn btn-ghost text-xl briem-hand gap-0">
+            <img
+              className="w-8 bg-orange-300 rounded-xl mr-2"
+              src="https://i.ibb.co/Rg37txC/icons8-book-stack-100.png"
+              alt=""
+            />
+            <span className="text-orange-300">Read</span>opia
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-           {NavLinks}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{NavLinks}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          <input
+            type="checkbox"
+            value="luxury"
+            className="toggle theme-controller bg-orange-300 border-sky-400 [--tglbg:theme(colors.sky.500)] checked:bg-lime-50 checked:border-blue-800 checked:[--tglbg:theme(colors.blue.900)] row-start-1 col-start-1 col-span-2"
+          />
+          <a className="btn">Login</a>
         </div>
       </div>
     </div>
