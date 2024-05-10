@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { useContext } from "react";
 
 const Nav = () => {
   const NavLinks = (
@@ -17,6 +19,11 @@ const Nav = () => {
       </li>
     </>
   );
+  const { user, SignOut } = useContext(AuthContext);
+  // console.log(user)
+  const handleSingOut = () => {
+    SignOut();
+  };
 
   return (
     <div className="">
@@ -64,9 +71,33 @@ const Nav = () => {
             value="luxury"
             className="toggle theme-controller bg-orange-300 border-sky-400 [--tglbg:theme(colors.sky.500)] checked:bg-lime-50 checked:border-blue-800 checked:[--tglbg:theme(colors.blue.900)] row-start-1 col-start-1 col-span-2"
           />
-          <Link to="/login" className="btn">
-            Login
-          </Link>
+          {user ? (
+            // <div className="avatar">
+
+            <div className="dropdown dropdown-hover">
+              <div tabIndex={0} role="button" className=" m-1">
+                <div className="w-10 mask mask-squircle">
+                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="right-0 dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-fit space-y-5 "
+              >
+                <li>{user.email}</li>
+                <li>
+                  <button className="btn" onClick={handleSingOut}>
+                    Sign Out
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            // </div>
+            <Link to="/login" className="btn">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>
