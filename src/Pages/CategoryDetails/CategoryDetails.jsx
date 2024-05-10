@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import BookCard from "./BookCard";
 
 const CategoryDetails = () => {
     const {name} = useParams()
@@ -21,7 +22,13 @@ const CategoryDetails = () => {
       console.log(thisCategory)
     return (
         <div>
-            Category: {name}
+            <h1 className="text-center text-3xl font-bold">Category: {name}</h1>
+         <div className="grid grid-cols-3 gap-5 m-5">
+         {
+                thisCategory.map(book=>
+                    <BookCard key={book._id} book={book}></BookCard>)
+            }
+         </div>
         </div>
     );
 };
