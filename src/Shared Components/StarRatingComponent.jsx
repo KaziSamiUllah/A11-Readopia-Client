@@ -1,9 +1,9 @@
 import StarRatings from "react-star-ratings";
 
-const StarRatingComponent = ({ rating }) => {
+const StarRatingComponent = ({rating}) => {
   return (
-    <div className="flex items-center drop-shadow-lg">      
-        <StarRatings
+     <div className="drop-shadow-xl">
+         <StarRatings
           rating={rating}
           starRatedColor="gold"
           numberOfStars={5}
@@ -12,8 +12,7 @@ const StarRatingComponent = ({ rating }) => {
           starSpacing="2px"
           isSelectable={false}
         />
-      </div>
-    
+     </div>
   );
 };
 

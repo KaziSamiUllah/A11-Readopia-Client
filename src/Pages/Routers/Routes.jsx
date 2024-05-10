@@ -8,6 +8,7 @@ import Login from "../Login&Regiser/Login";
 import Register from "../Login&Regiser/Register";
 
 import CategoryDetails from "../CategoryDetails/CategoryDetails";
+import BookDetail from "../BookDetail/BookDetail";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
         {
           path:"/categories/:name",
           element:<CategoryDetails></CategoryDetails>
+        },
+        {
+          path:"/bookdetail/:name",
+          element:<BookDetail></BookDetail>
         },
       ]
     }

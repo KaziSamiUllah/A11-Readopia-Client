@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 const Nav = () => {
   const NavLinks = (
@@ -24,18 +24,6 @@ const Nav = () => {
   const handleSingOut = () => {
     SignOut();
   };
-
-// const savedTheme = localStorage.getItem('theme') === 'true';
-
-// const [theme, setTheme] = useState(false)
-// const handleTheme=(e)=>{
-//  if(e.target.checked == true){
-//   setTheme(e.target.checked)
-
-//  }
-//   console.log(theme , savedTheme)
-// }
-
 
 
 
@@ -92,13 +80,14 @@ const Nav = () => {
             <div className="dropdown dropdown-hover">
               <div tabIndex={0} role="button" className=" m-1">
                 <div className="w-10 mask mask-squircle">
-                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                  <img src={user.photoURL} />
                 </div>
               </div>
               <ul
                 tabIndex={0}
                 className="right-0 dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-fit space-y-5 "
               >
+                <li>{user.displayName}</li>
                 <li>{user.email}</li>
                 <li>
                   <button className="btn" onClick={handleSingOut}>

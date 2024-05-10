@@ -7,7 +7,7 @@ import 'animate.css';
 
 
 const Login = () => {
-    const { SingIn } = useContext(AuthContext)
+    const { SingIn, signInWithGoogle } = useContext(AuthContext)
   const Navigate = useNavigate();
   const location = useLocation();
   const [showPass, setShowPass] = useState(false);
@@ -33,7 +33,9 @@ const Login = () => {
 
   };
 
-  const handleGoogleLogIn = () => {};
+  const handleGoogleLogIn = () => {
+    signInWithGoogle();
+  };
 
 
   return (

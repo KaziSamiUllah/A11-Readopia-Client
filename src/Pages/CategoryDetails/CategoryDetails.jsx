@@ -9,8 +9,7 @@ const CategoryDetails = () => {
     const [thisCategory, setThisCategory] = useState([])
       
     useEffect(() => {
-        // Make a GET request to the server endpoint to fetch data with the same emails
-        axios.get(`http://localhost:5000/categories/${name}`)
+          axios.get(`http://localhost:5000/categories/${name}`)
           .then(res => {
             setThisCategory(res.data);
           })
@@ -23,7 +22,7 @@ const CategoryDetails = () => {
     return (
         <div>
             <h1 className="text-center text-3xl font-bold">Category: {name}</h1>
-         <div className="grid grid-cols-3 gap-5 m-5">
+         <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-5 m-5">
          {
                 thisCategory.map(book=>
                     <BookCard key={book._id} book={book}></BookCard>)

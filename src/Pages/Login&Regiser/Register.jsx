@@ -2,50 +2,50 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const Register = () => {
-  const { SignUp } = useContext(AuthContext);
-  // console.log(user);
+  const { SignUp, UpdateUserData, user } = useContext(AuthContext);
+  
+  console.log(user);
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
-    const name = form.get("name");
+    const userName = form.get("name");
     const url = form.get("url");
     const librarian = form.get("librarian");
 
-    const userData = { email, name, url, librarian };
-    // console.log(userData);
-
     SignUp(email, password)
-      .then((res) => {
-        if (res.user) {
-          fetch("http://localhost:5000/users", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userData),
+    .then((res) => {
+      if (res.user) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "User has been created",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    })
+    .then(() => {
+      UpdateUserData(userName, url)
+          .then(() => {
+              console.log("Profile Updated Successfully")
           })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.acknowledged === true) {
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "User has been created",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-              }
-            });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+          .catch(error => {
+              toast('Sorry! Something wrong occured while updateing username or photo URL')
+              console.log(error)
+
+          })})
+       
+       
   };
+
+  
+  
+
 
   return (
     <div className="flex flex-col min-h-screen">
