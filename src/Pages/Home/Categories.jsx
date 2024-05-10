@@ -2,11 +2,12 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Categories = () => {
   AOS.init();
 
-  
+
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     axios
@@ -29,6 +30,7 @@ const Categories = () => {
       <div className="grid grid-cols-3 gap-5 p-10">
         {categories.map((category, idx) => (
           <div key={idx} data-aos="zoom-in">
+            <Link to={`categories/${category.name}`}>
             <div className="card w-full bg-base-100 shadow-xl image-full">
               <figure className="h-64">
                 <img src={category.img} alt={category.name} />
@@ -38,6 +40,7 @@ const Categories = () => {
                 <p className="text-white">{category.description}</p>
               </div>
             </div>
+            </Link>
           </div>
         ))}
       </div>

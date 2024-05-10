@@ -104,12 +104,12 @@ const AddBooks = () => {
             required
           >
             <option value="" disabled>Select a category</option>
-            <option value="option1">Fiction</option>
-            <option value="option2">Sports</option>
-            <option value="option3">Science Fiction</option>
-            <option value="option3">Mystery</option>
-            <option value="option3">Fantasy</option>
-            <option value="option3">Romance</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Sports">Sports</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Romance">Romance</option>
             {/* Add more options as needed */}
           </select>
         </div>

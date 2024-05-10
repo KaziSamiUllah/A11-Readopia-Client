@@ -7,6 +7,8 @@ import BorrowedBooks from "../BorrowedBooks/BorrowedBooks";
 import Login from "../Login&Regiser/Login";
 import Register from "../Login&Regiser/Register";
 
+import CategoryDetails from "../CategoryDetails/CategoryDetails";
+
 const router = createBrowserRouter([
     {
       path:"/",
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
         {
           path:"/register",
           element:<Register></Register>
+        },
+        {
+          path:"/categories/:name",
+          element:<CategoryDetails></CategoryDetails>
         },
       ]
     }
