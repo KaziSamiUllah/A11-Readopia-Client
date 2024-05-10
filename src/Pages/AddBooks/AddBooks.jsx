@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-
+import 'animate.css';
 const AddBooks = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +43,7 @@ const AddBooks = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto  p-16 border-2 rounded-2xl shadow-lg">
+    <div className="max-w-2xl mx-auto  p-16 border-2 rounded-2xl shadow-lg animate__bounceIn">
         <h1 className="text-center font-bold text-2xl mb-5">Add a new book</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -104,9 +104,12 @@ const AddBooks = () => {
             required
           >
             <option value="" disabled>Select a category</option>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+            <option value="option1">Fiction</option>
+            <option value="option2">Sports</option>
+            <option value="option3">Science Fiction</option>
+            <option value="option3">Mystery</option>
+            <option value="option3">Fantasy</option>
+            <option value="option3">Romance</option>
             {/* Add more options as needed */}
           </select>
         </div>

@@ -52,7 +52,7 @@ const Register = () => {
       <div className="flex-grow">
         <div>
           <div className=" lg:p-14 h-[68vh]">
-            <div className="mx-auto p-8 bg-slate-100 shadow-lg  rounded-xl lg:w-1/4">
+            <div className=" max-w-lg animate__bounceIn mx-auto p-8 bg-slate-100 shadow-lg  rounded-xl lg:w-1/4">
               <div className="flex justify-center items-center">
                 <h1 className="text-black font-bold text-2xl">Register</h1>
               </div>

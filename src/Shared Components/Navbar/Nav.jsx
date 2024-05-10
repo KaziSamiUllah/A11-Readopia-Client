@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const Nav = () => {
   const NavLinks = (
@@ -24,6 +24,20 @@ const Nav = () => {
   const handleSingOut = () => {
     SignOut();
   };
+
+// const savedTheme = localStorage.getItem('theme') === 'true';
+
+// const [theme, setTheme] = useState(false)
+// const handleTheme=(e)=>{
+//  if(e.target.checked == true){
+//   setTheme(e.target.checked)
+
+//  }
+//   console.log(theme , savedTheme)
+// }
+
+
+
 
   return (
     <div className="">
@@ -67,6 +81,7 @@ const Nav = () => {
         </div>
         <div className="navbar-end gap-5">
           <input
+          // onChange={handleTheme}
             type="checkbox"
             value="luxury"
             className="toggle theme-controller bg-orange-300 border-sky-400 [--tglbg:theme(colors.sky.500)] checked:bg-lime-50 checked:border-blue-800 checked:[--tglbg:theme(colors.blue.900)] row-start-1 col-start-1 col-span-2"

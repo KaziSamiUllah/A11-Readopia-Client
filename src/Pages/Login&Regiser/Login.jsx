@@ -3,6 +3,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Providers/AuthProvider";
+import 'animate.css';
+
 
 const Login = () => {
     const { SingIn } = useContext(AuthContext)
@@ -38,7 +40,7 @@ const Login = () => {
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">
         <div className="lg:p-14 ">
-          <div className="mx-auto p-8 bg-slate-100 rounded-xl shadow-lg md:w-1/2 lg:w-1/4">
+          <div className=" animate__bounceIn mx-auto p-8 bg-slate-100 rounded-xl shadow-lg md:w-1/2 lg:w-1/4 ">
             <div className="flex justify-center items-center">
               <h1 className="text-black font-bold text-2xl">Sign In</h1>
             </div>
