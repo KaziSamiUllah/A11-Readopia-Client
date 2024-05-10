@@ -4,17 +4,13 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
 import moment from "moment";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
 
 const BookDetail = () => {
   const { user } = useContext(AuthContext);
   const [bookDetails, setBookDetails] = useState({});
   const { name } = useParams();
-  const issuedOn = moment().format('MM/DD/YYYY');
-  console.log(issuedOn)   
-
-
+  const issuedOn = moment().format("YYYY-MM-DD");
 
   useEffect(() => {
     axios
@@ -22,24 +18,31 @@ const BookDetail = () => {
       .then((res) => setBookDetails(res.data))
       .catch((error) => console.log(error));
   }, []);
-  const { url, author, category, description, quantity, rating } = bookDetails;
 
-  const [borrowedBook, setBorrowed] = useState({});
+  const { _id, url, author, category, description, quantity, rating } =
+    bookDetails;
+
+const reduced = (quantity-1)
+
 
   const handleBorrow = (e) => {
-    e.preventDefault();
     const form = new FormData(e.currentTarget);
     const returnOn = form.get("date");
     const borrowedBy = user.displayName;
     const email = user.email;
-    const currentBook = {url,name, borrowedBy, email, author, category, returnOn, issuedOn };
-    setBorrowed(currentBook);
-    const modal = document.getElementById("my_modal_6");
-    modal.checked = false;
-    console.log(borrowedBook);
+    const currentBook = {
+      url,
+      name,
+      borrowedBy,
+      email,
+      author,
+      category,
+      returnOn,
+      issuedOn,
+    };
 
     axios
-      .post("http://localhost:5000/borrowed", borrowedBook, {
+      .post("http://localhost:5000/borrowed", currentBook, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -52,6 +55,21 @@ const BookDetail = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
+    // const modal = document.getElementById("my_modal_6");
+    // modal.checked = false;
+
+    axios.put(`http://localhost:5000/books/${_id}`, {
+      reduced
+    })
+    .then(response => {
+      console.log(response.data); // Log the response data if needed
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+
+
   };
 
   return (
@@ -93,7 +111,7 @@ const BookDetail = () => {
             <h1>Email: {user?.email}</h1>
             <label htmlFor="">
               Return Date:
-              <input name="date" type="date"/>
+              <input name="date" type="date" />
             </label>
             <div className="flex flex-row justify-between  items-center mt-5">
               <button

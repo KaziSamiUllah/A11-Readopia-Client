@@ -6,7 +6,7 @@ const AddBooks = () => {
     const form = new FormData(e.currentTarget);
     const url = form.get("url");
     const name = form.get("name");
-    const quantity = form.get("quantity");
+    const quantity = parseInt(form.get("quantity"), 10);
     const author = form.get("author");
     const category = form.get("category");
     const description = form.get("description");
