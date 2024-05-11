@@ -10,6 +10,7 @@ import Register from "../Login&Regiser/Register";
 import CategoryDetails from "../CategoryDetails/CategoryDetails";
 import BookDetail from "../BookDetail/BookDetail";
 import PrivateRoutes from "./PrivateRoutes";
+import Updatebook from "../UpdateBook/Updatebook";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <BookDetail></BookDetail>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/updateBook/:name",
+        element: (
+          <PrivateRoutes>
+            <Updatebook></Updatebook>
           </PrivateRoutes>
         ),
       },

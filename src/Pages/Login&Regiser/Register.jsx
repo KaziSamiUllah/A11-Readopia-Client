@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const Register = () => {
   const { SignUp, UpdateUserData, user } = useContext(AuthContext);
-  
+
   console.log(user);
   const handleRegister = (e) => {
     e.preventDefault();
@@ -17,35 +17,44 @@ const Register = () => {
     const url = form.get("url");
     const librarian = form.get("librarian");
 
-    SignUp(email, password)
-    .then((res) => {
-      if (res.user) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User has been created",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+    const validPass = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (!validPass.test(password)) {
+      if (password.length < 6) {
+        toast("Password must be at least 6 characters long.");
+      } else if (!/(?=.*[a-z])/.test(password)) {
+        toast("Password must contain at least one lowercase letter.");
+      } else if (!/(?=.*[A-Z])/.test(password)) {
+        toast("Password must contain at least one uppercase letter.");
       }
-    })
-    .then(() => {
-      UpdateUserData(userName, url)
-          .then(() => {
-              console.log("Profile Updated Successfully")
-          })
-          .catch(error => {
-              toast('Sorry! Something wrong occured while updateing username or photo URL')
-              console.log(error)
-
-          })})
-       
-       
+    }
+    
+    else {
+      SignUp(email, password)
+        .then((res) => {
+          if (res.user) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "User has been created",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .then(() => {
+          UpdateUserData(userName, url)
+            .then(() => {
+              console.log("Profile Updated Successfully");
+            })
+            .catch((error) => {
+              toast(
+                "Sorry! Something wrong occured while updateing username or photo URL"
+              );
+              console.log(error);
+            });
+        });
+    }
   };
-
-  
-  
-
 
   return (
     <div className="flex flex-col min-h-screen">

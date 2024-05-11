@@ -22,7 +22,6 @@ const BookDetail = () => {
   const { _id, url, author, category, description, quantity, rating } =
     bookDetails;
 
-
   const handleBorrow = (e) => {
     const form = new FormData(e.currentTarget);
     const returnOn = form.get("date");
@@ -49,7 +48,7 @@ const BookDetail = () => {
       .then((response) => {
         if (response.data.acknowledged === true) {
           toast("Saved Successfully");
-          console.log(response.data)
+          console.log(response.data);
         }
       })
       .catch((error) => {
@@ -58,21 +57,15 @@ const BookDetail = () => {
     // const modal = document.getElementById("my_modal_6");
     // modal.checked = false;
 
-
-
-
-
-    const qty = '-1';
-    axios.put(`http://localhost:5000/books/${_id}`, {qty} )
-    .then(response => {
-      console.log(response.data); 
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-
-
-
+    const qty = "-1";
+    axios
+      .put(`http://localhost:5000/books/${_id}`, { qty })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (

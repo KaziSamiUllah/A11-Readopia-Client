@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Providers/AuthProvider";
 import 'animate.css';
+import { toast } from "react-toastify";
 
 
 const Login = () => {
@@ -24,11 +25,12 @@ const Login = () => {
     const password = form.get("password");
 
     SingIn(email, password)
-    .then((user)=>{
-        console.log(user)
+    .then((res)=>{
+      console.log( res.user?.displayName)
+        toast(`welcome back ${res.user?.displayName}`)
     })
-    .catch(error=>{
-        console.log(error)
+    .catch(error=>{ 
+      toast(error.message)
     })
 
   };
@@ -42,7 +44,7 @@ const Login = () => {
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">
         <div className="lg:p-14 ">
-          <div className=" animate__bounceIn mx-auto p-8 bg-slate-100 rounded-xl shadow-lg md:w-1/2 lg:w-1/4 ">
+          <div className=" animate__bounceIn mx-auto p-8 bg-slate-100 rounded-xl shadow-lg  max-w-lg ">
             <div className="flex justify-center items-center">
               <h1 className="text-black font-bold text-2xl">Sign In</h1>
             </div>
