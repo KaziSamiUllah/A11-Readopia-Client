@@ -11,6 +11,12 @@ const BookDetail = () => {
   const [bookDetails, setBookDetails] = useState({});
   const { name } = useParams();
   const issuedOn = moment().format("YYYY-MM-DD");
+  const [borrowBtn, setBorrowBtn] = useState(true);
+  const [borrowed, setBorrowed] = useState([]);
+
+console.log()
+
+
 
   useEffect(() => {
     axios
@@ -21,6 +27,27 @@ const BookDetail = () => {
 
   const { _id, url, author, category, description, quantity, rating } =
     bookDetails;
+
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/borrowed/${user.email}`)
+      .then((res) => {
+        setBorrowed(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const isBorrowed = borrowed.find((borrow) => borrow.book_id === _id);
+  useEffect(() => {
+    if (isBorrowed || bookDetails.quantity<=0) {
+      setBorrowBtn(false);
+    }
+  }, [isBorrowed , bookDetails.quantity ]);
+
+
 
   const handleBorrow = (e) => {
     const form = new FormData(e.currentTarget);
@@ -54,8 +81,7 @@ const BookDetail = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-    // const modal = document.getElementById("my_modal_6");
-    // modal.checked = false;
+
 
     const qty = "-1";
     axios
@@ -81,17 +107,19 @@ const BookDetail = () => {
               Category: <span className="font-semibold">{category}</span>
             </h1>
             <h1>Rating: {rating} </h1>
-            <p className=" text-base first-letter:text-2xl w-2/3 my-5 text-justify">
+            <p className=" text-base first-letter:text-2xl  my-5 text-justify">
               {description}
             </p>
             <p className=" text-base">Available: {quantity} copies</p>
           </div>
-          {/* <button onClick={handleBorrow} htmlFor="my_modal_6" className="btn my-10 btn-info text-lg font-bold">Borrow now</button> */}
+         
           <label
             htmlFor="my_modal_6"
-            className="btn btn-info text-lg font-bold"
+            className={`btn btn-info text-lg font-bold ${
+              borrowBtn ? "" : "pointer-events-none"
+            }`}
           >
-            Borrow
+            <h1 className={`${borrowBtn? '' : 'text-red-400'}`}>Borrow</h1>
           </label>
         </div>
       </div>
