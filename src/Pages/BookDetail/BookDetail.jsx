@@ -22,8 +22,6 @@ const BookDetail = () => {
   const { _id, url, author, category, description, quantity, rating } =
     bookDetails;
 
-const reduced = (quantity-1)
-
 
   const handleBorrow = (e) => {
     const form = new FormData(e.currentTarget);
@@ -33,6 +31,7 @@ const reduced = (quantity-1)
     const currentBook = {
       url,
       name,
+      book_id: _id,
       borrowedBy,
       email,
       author,
@@ -50,6 +49,7 @@ const reduced = (quantity-1)
       .then((response) => {
         if (response.data.acknowledged === true) {
           toast("Saved Successfully");
+          console.log(response.data)
         }
       })
       .catch((error) => {
@@ -58,11 +58,14 @@ const reduced = (quantity-1)
     // const modal = document.getElementById("my_modal_6");
     // modal.checked = false;
 
-    axios.put(`http://localhost:5000/books/${_id}`, {
-      reduced
-    })
+
+
+
+
+    const qty = '-1';
+    axios.put(`http://localhost:5000/books/${_id}`, {qty} )
     .then(response => {
-      console.log(response.data); // Log the response data if needed
+      console.log(response.data); 
     })
     .catch(error => {
       console.error('Error:', error);

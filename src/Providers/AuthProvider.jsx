@@ -4,12 +4,12 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut, GoogleAuthProvider, 
+  signOut,
+  GoogleAuthProvider,
   updateProfile,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/firebase.config";
-
 
 export const AuthContext = createContext(null);
 
@@ -29,10 +29,6 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
-
- 
-
-
 
   const googleProvider = new GoogleAuthProvider();
   const signInWithGoogle = () => {
@@ -59,21 +55,22 @@ const AuthProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-  const UpdateUserData =(userName, img) =>{
+  const UpdateUserData = (userName, img) => {
     return updateProfile(auth.currentUser, {
-      displayName: userName, photoURL: img})
-    };
+      displayName: userName,
+      photoURL: img,
+    });
+  };
 
-
-
-
-
-
-
-
-
-  const authInfo = { SignUp, SingIn, SignOut, signInWithGoogle, UpdateUserData, user };
+  const authInfo = {
+    SignUp,
+    SingIn,
+    SignOut,
+    signInWithGoogle,
+    UpdateUserData,
+    user,
+    loading
+  };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
