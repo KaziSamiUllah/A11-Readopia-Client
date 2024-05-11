@@ -43,7 +43,7 @@ const AddBooks = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto  p-16 border-2 rounded-2xl shadow-lg animate__bounceIn">
+    <div className="mb-10 max-w-2xl mx-auto  p-16 border-2 rounded-2xl shadow-lg animate__bounceIn">
         <h1 className="text-center font-bold text-2xl mb-5">Add a new book</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

@@ -21,30 +21,14 @@ const Categories = () => {
   console.log(categories);
 
   return (
-    <div>
+    <div id="category">
       <h1 className="font-bold text-3xl text-center ">
         {" "}
         Popular book Categories
       </h1>
       <div className="grid grid-cols-4 gap-5 p-10">
         {categories.map((category, idx) => (
-          // <div key={idx} data-aos="zoom-in">
-          //   <Link to={`categories/${category.name}`}>
-          //   <div className="card w-full bg-base-100 shadow-xl image-full">
-          //     <figure className="h-[40vh]">
-          //       <img src={category.img} alt={category.name} />
-          //     </figure>
-          //     <div className="card-body">
-          //       <div>
-          //       <h2 className="card-title text-white">{category.name}</h2>
-          //       <p className="text-white">{category.description}</p>
-          //       </div>
-          //     </div>
-          //   </div>
-          //   </Link>
-          // </div>
-
-          <div key={idx} data-aos="zoom-in">
+            <div key={idx} data-aos="zoom-in">
             <Link to={`categories/${category.name}`}>
               <div
                 className="h-[40vh] bg-cover bg-center flex flex-col justify-center items-center text-center"

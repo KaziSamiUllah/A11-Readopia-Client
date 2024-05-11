@@ -69,7 +69,7 @@ const BorrowedBooks = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-[calc(100vh-260px)]">
       <h1 className="text-3xl text-center font-bold my-10">My Borroes</h1>
       <div>
         {borrowed.map((borrowedBook) => (

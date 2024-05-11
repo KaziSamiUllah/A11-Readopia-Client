@@ -57,7 +57,7 @@ const Nav = () => {
           </div>
           <Link to="/" className="btn btn-ghost text-xl briem-hand gap-0 ">
             <img
-              className="w-8 bg-orange-300 rounded-xl mr-2"
+              className="w-10 bg-orange-300 rounded-xl mr-2"
               src="https://i.ibb.co/Rg37txC/icons8-book-stack-100.png"
               alt=""
             />
