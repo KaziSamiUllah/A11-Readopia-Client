@@ -6,9 +6,12 @@ import Footer from "./Footer/Footer";
 const Layout = () => {
   return (
     <>
-    <ToastContainer></ToastContainer>
+      <ToastContainer></ToastContainer>
       <Nav></Nav>
-      <Outlet></Outlet>
+      <div className="montserrat mx-20">
+        <Outlet></Outlet>
+      </div>
+
       <Footer></Footer>
     </>
   );

@@ -25,10 +25,8 @@ const Nav = () => {
     SignOut();
   };
 
-
-
   return (
-    <div className="">
+    <div className="px-16">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
@@ -55,24 +53,26 @@ const Nav = () => {
               {NavLinks}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost text-xl briem-hand gap-0 ">
+          <Link to="/" className="rounded-2xl btn btn-ghost text-xl briem-hand bg-red-500 px-1">
             <img
               className="w-10 bg-orange-300 rounded-xl mr-2"
               src="https://i.ibb.co/Rg37txC/icons8-book-stack-100.png"
               alt=""
             />
-            <span className="text-orange-300">Read</span>opia
+            <h1 className="text-3xl pb-2 pr-2"><span className="text-orange-300 ">Read</span>opia</h1>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{NavLinks}</ul>
+          <ul className="menu menu-horizontal px-1 text-lg font-semibold">
+            {NavLinks}
+          </ul>
         </div>
         <div className="navbar-end gap-5">
           <input
-          // onChange={handleTheme}
+            // onChange={handleTheme}
             type="checkbox"
             value="luxury"
-            className="toggle theme-controller bg-orange-300 border-sky-400 [--tglbg:theme(colors.sky.500)] checked:bg-lime-50 checked:border-blue-800 checked:[--tglbg:theme(colors.blue.900)] row-start-1 col-start-1 col-span-2"
+            className="toggle theme-controller bg-orange-300 border-sky-400 [--tglbg:theme(colors.slate.900)] checked:bg-lime-50 checked:border-red-300 checked:[--tglbg:theme(colors.orange.300)] row-start-1 col-start-1 col-span-2"
           />
           {user ? (
             // <div className="avatar">
