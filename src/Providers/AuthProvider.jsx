@@ -49,6 +49,15 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+
+      if (user) {
+        const userEmail = user.email;
+        const userData = { userEmail, librarian };
+        axios.post("http://localhost:5000/users", userData)
+        .then(res => 
+          {console.log(res.data)
+        });
+      }
     });
     return () => {
       //CleanUP
@@ -67,14 +76,14 @@ const AuthProvider = ({ children }) => {
   /////////////////store user info to db///////////////
   console.log(user);
 
-  if (user) {
-    const userEmail = user.email;
-    const userData = { userEmail, librarian };
-    axios.post("http://localhost:5000/users", userData)
-    .then(res => 
-      {console.log(res.data)
-    });
-  }
+  // if (user) {
+  //   const userEmail = user.email;
+  //   const userData = { userEmail, librarian };
+  //   axios.post("http://localhost:5000/users", userData)
+  //   .then(res => 
+  //     {console.log(res.data)
+  //   });
+  // }
 
 
 
