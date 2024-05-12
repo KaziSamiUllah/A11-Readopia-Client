@@ -14,7 +14,7 @@ const BookDetail = () => {
   const [borrowBtn, setBorrowBtn] = useState(true);
   const [borrowed, setBorrowed] = useState([]);
 
-console.log()
+
 
 
 
@@ -22,7 +22,7 @@ console.log()
     axios
       .get(`http://localhost:5000/books/${name}`)
       .then((res) => setBookDetails(res.data))
-      .catch((error) => console.log(error));
+      .catch((error) => (error));
   }, []);
 
   const { _id, url, author, category, description, quantity, rating } =
@@ -75,7 +75,7 @@ console.log()
       .then((response) => {
         if (response.data.acknowledged === true) {
           toast("Saved Successfully");
-          console.log(response.data);
+          (response.data);
         }
       })
       .catch((error) => {
@@ -87,7 +87,7 @@ console.log()
     axios
       .put(`http://localhost:5000/books/${_id}`, { qty })
       .then((response) => {
-        console.log(response.data);
+        (response.data);
       })
       .catch((error) => {
         console.error("Error:", error);

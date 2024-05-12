@@ -16,10 +16,10 @@ const Categories = () => {
         setCategories(res.data);
       })
       .catch((error) => {
-        console.log(error);
+        (error);
       });
   }, []);
-  console.log(categories);
+  (categories);
   const text = "Explore popular books in";
   const wordArray = [
     "Fiction",

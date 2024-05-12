@@ -15,7 +15,7 @@ const Login = () => {
 
   const toggleView = () => {
     setShowPass(!showPass);
-    console.log(showPass);
+    (showPass);
   };
 
   const handleLogin = (e) => {
@@ -26,7 +26,7 @@ const Login = () => {
 
     SingIn(email, password)
     .then((res)=>{
-      console.log( res.user?.displayName)
+      ( res.user?.displayName)
         toast(`welcome back ${res.user?.displayName}`)
     })
     .catch(error=>{ 

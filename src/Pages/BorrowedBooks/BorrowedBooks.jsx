@@ -11,7 +11,7 @@ const BorrowedBooks = () => {
   const [borrowed, setBorrowed] = useState([]);
 
   //   const userEmail = user.email;
-  console.log(user.email);
+  user.email;
 
   useEffect(() => {
     axios
@@ -25,7 +25,7 @@ const BorrowedBooks = () => {
   }, []);
 
   const handleReturn = (book_id, id) => {
-    console.log(id);
+    id;
     const qty = "1";
     Swal.fire({
       title: "Are you sure?",
@@ -40,7 +40,7 @@ const BorrowedBooks = () => {
         axios
           .put(`http://localhost:5000/books/${book_id}`, { qty })
           .then((response) => {
-            console.log(response.data);
+            response.data;
           })
           .catch((error) => {
             console.error("Error:", error);
@@ -49,15 +49,14 @@ const BorrowedBooks = () => {
         axios
           .delete(`http://localhost:5000/borrowed/${id}`)
           .then((response) => {
-            console.log("Delete operation successful", response);
+            "Delete operation successful", response;
           })
           .catch((error) => {
             console.error("Error:", error);
           });
 
-         const updatedBooks = borrowed.filter(books=>books._id !== id)
-          setBorrowed(updatedBooks)
-
+        const updatedBooks = borrowed.filter((books) => books._id !== id);
+        setBorrowed(updatedBooks);
 
         Swal.fire({
           title: "Returned!",

@@ -1,32 +1,56 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const Nav = () => {
-  const NavLinks = (
-    <>
-      <li>
-        <Link>Home</Link>
-      </li>
-      <li>
-        <Link to="/allBooks">All Books</Link>
-      </li>
-      <li>
-        <Link to="/addBooks">Add books</Link>
-      </li>
-      <li>
-        <Link to="borrowedBooks">Borrowed Books</Link>
-      </li>
-    </>
-  );
+ 
   const { user, SignOut } = useContext(AuthContext);
-  // console.log(user)
   const handleSingOut = () => {
     SignOut();
   };
 
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      axios.get(`http://localhost:5000/users/${user.email}`)
+        .then(res => {
+          setUserData(res.data);
+        })
+        .catch(error => {
+          console.error('Error fetching user data:', error);
+        });
+    }
+  }, [user]);
+
+console.log(userData)
+
+const NavLinks = (
+  <>
+    <li>
+      <Link>Home</Link>
+    </li>
+    {userData?.librarian  && 
+   <>
+    <li>
+    <Link to="/allBooks">All Books</Link>
+  </li> 
+    <li>
+      <Link to="/addBooks">Add books</Link>
+    </li>
+   </>}
+    <li>
+      <Link to="borrowedBooks">Borrowed Books</Link>
+    </li>
+  </>
+);
+
+
+
+
   return (
-    <div className="px-16">
+    <div className="px-16" >
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
@@ -53,13 +77,18 @@ const Nav = () => {
               {NavLinks}
             </ul>
           </div>
-          <Link to="/" className="rounded-2xl btn btn-ghost text-xl briem-hand bg-red-500 px-1">
+          <Link
+            to="/"
+            className="rounded-2xl btn btn-ghost text-xl briem-hand bg-red-500 px-1"
+          >
             <img
               className="w-10 bg-orange-300 rounded-xl mr-2"
               src="https://i.ibb.co/Rg37txC/icons8-book-stack-100.png"
               alt=""
             />
-            <h1 className="text-3xl pb-2 pr-2"><span className="text-orange-300 ">Read</span>opia</h1>
+            <h1 className="text-3xl pb-2 pr-2">
+              <span className="text-orange-300 ">Read</span>opia
+            </h1>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -75,12 +104,17 @@ const Nav = () => {
             className="toggle theme-controller bg-orange-300 border-sky-400 [--tglbg:theme(colors.slate.900)] checked:bg-lime-50 checked:border-red-300 checked:[--tglbg:theme(colors.orange.300)] row-start-1 col-start-1 col-span-2"
           />
           {user ? (
-            // <div className="avatar">
 
             <div className="dropdown dropdown-hover">
               <div tabIndex={0} role="button" className=" m-1">
                 <div className="w-10 mask mask-squircle">
-                  <img src={user.photoURL} />
+                  <img
+                    src={
+                      user?.photoURL
+                        ? user.photoURL
+                        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ6QbAPJOG3NsnkipeqR5pmTu12X7WU8F4g_WHDTcmBw&s"
+                    }
+                  />
                 </div>
               </div>
               <ul
@@ -89,6 +123,7 @@ const Nav = () => {
               >
                 <li>{user.displayName}</li>
                 <li>{user.email}</li>
+                <li>Role: {userData?.librarian ? "Librarian" : "Member"} </li>
                 <li>
                   <button className="btn" onClick={handleSingOut}>
                     Sign Out
@@ -97,7 +132,6 @@ const Nav = () => {
               </ul>
             </div>
           ) : (
-            // </div>
             <Link to="/login" className="btn">
               Login
             </Link>

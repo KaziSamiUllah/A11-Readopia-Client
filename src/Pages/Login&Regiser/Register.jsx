@@ -5,9 +5,10 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const { SignUp, UpdateUserData, user } = useContext(AuthContext);
+  const { SignUp, UpdateUserData, user, setLibrarian } =
+    useContext(AuthContext);
 
-  console.log(user);
+  user;
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -16,6 +17,12 @@ const Register = () => {
     const userName = form.get("name");
     const url = form.get("url");
     const librarian = form.get("librarian");
+
+    if (librarian == "on") {
+      setLibrarian(true);
+    } else {
+      setLibrarian(false);
+    }
 
     const validPass = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (!validPass.test(password)) {
@@ -26,9 +33,7 @@ const Register = () => {
       } else if (!/(?=.*[A-Z])/.test(password)) {
         toast("Password must contain at least one uppercase letter.");
       }
-    }
-    
-    else {
+    } else {
       SignUp(email, password)
         .then((res) => {
           if (res.user) {
@@ -44,13 +49,13 @@ const Register = () => {
         .then(() => {
           UpdateUserData(userName, url)
             .then(() => {
-              console.log("Profile Updated Successfully");
+              ("Profile Updated Successfully");
             })
             .catch((error) => {
               toast(
                 "Sorry! Something wrong occured while updateing username or photo URL"
               );
-              console.log(error);
+              error;
             });
         });
     }
@@ -61,7 +66,7 @@ const Register = () => {
       <div className="flex-grow">
         <div>
           <div className=" lg:p-14 h-[68vh]">
-            <div className=" max-w-lg animate__bounceIn mx-auto p-8 bg-slate-100 shadow-lg  rounded-xl lg:w-1/4">
+            <div className=" max-w-lg animate__bounceIn mx-auto p-8 bg-slate-100 shadow-lg  rounded-xl ">
               <div className="flex justify-center items-center">
                 <h1 className="text-black font-bold text-2xl">Register</h1>
               </div>
@@ -97,15 +102,14 @@ const Register = () => {
                     type="password"
                     name="password"
                     autoComplete="current-password"
-                    required
                     className="appearance-none rounded-r-md relative block w-full px-3 py-2 border bg-transparent border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     placeholder="Password"
                   />
                 </div>
                 <div className="flex flex-col items-left gap-2">
                   <div className="flex gap-2">
-                    <input type="checkbox" name="librarian" />{" "}
-                    <h1 className="text-black">Are you a librarian?</h1>
+                    <input type="checkbox" name="librarian" title="Can varify by Employee ID"/>{" "}
+                    <h1 className="text-black">Are you a librarian here?</h1>
                   </div>
 
                   <div className="flex gap-2">

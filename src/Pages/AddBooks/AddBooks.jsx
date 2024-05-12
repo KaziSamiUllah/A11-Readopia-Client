@@ -14,7 +14,7 @@ const AddBooks = () => {
 
     const bookDetails = {url, name, quantity, author, category, description, rating}
     
-    // console.log("Form submitted!", bookDetails);
+    // ("Form submitted!", bookDetails);
 
     fetch("http://localhost:5000/books", {
             method: "POST",

@@ -10,12 +10,14 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/firebase.config";
+import axios, { Axios } from "axios";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [librarian, setLibrarian] = useState(false);
   const auth = getAuth(app);
 
   //// Sign UP////
@@ -62,6 +64,20 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  /////////////////store user info to db///////////////
+  console.log(user);
+
+  if (user) {
+    const userEmail = user.email;
+    const userData = { userEmail, librarian };
+    axios.post("http://localhost:5000/users", userData)
+    .then(res => 
+      {console.log(res.data)
+    });
+  }
+
+
+
   const authInfo = {
     SignUp,
     SingIn,
@@ -69,7 +85,9 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     UpdateUserData,
     user,
-    loading
+    loading,
+    setLibrarian,
+    librarian
   };
 
   return (

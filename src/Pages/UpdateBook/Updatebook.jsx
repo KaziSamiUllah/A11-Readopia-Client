@@ -11,7 +11,7 @@ const Updatebook = () => {
     axios
       .get(`http://localhost:5000/books/${name}`)
       .then((res) => setUpdate(res.data))
-      .catch((error) => console.log(error));
+      .catch((error) => (error));
   }, []);
   
   const {_id, url, author, category, quantity, description, rating } = updateDetails;
@@ -19,7 +19,7 @@ const Updatebook = () => {
 
 
 
-//   console.log(updateDetails);
+//   (updateDetails);
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -44,7 +44,7 @@ const Updatebook = () => {
 
     axios.put(`http://localhost:5000/books/${_id}`, formUpdate)
       .then((response) => {
-        console.log(response.data)
+        (response.data)
         if(response.data.acknowledged == true)
             {
                 Swal.fire({

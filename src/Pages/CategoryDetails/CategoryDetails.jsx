@@ -18,7 +18,7 @@ const CategoryDetails = () => {
           });
       }, []);
 
-      console.log(thisCategory)
+      (thisCategory)
     return (
         <div>
             <h1 className="text-center text-3xl font-bold">Category: {name}</h1>

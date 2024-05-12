@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import StarRatingComponent from "../../Shared Components/StarRatingComponent";
+import Aos from "aos";
 
 const BookCard2 = ({ book }) => {
   const { url, author, name, category, rating, _id } = book;
-
+  Aos.init();
   return (
-    <div className="p-10 border-2 shadow-xl rounded-2xl  flex flex-col gap-2 h-[70vh]">
+    <div
+      data-aos="zoom-out"
+      className="p-10 border-2 shadow-xl rounded-2xl  flex flex-col gap-2 h-[70vh]"
+    >
       <div className="h-[35vh]">
         <img className="h-full mx-auto" src={url} alt="" />
       </div>
