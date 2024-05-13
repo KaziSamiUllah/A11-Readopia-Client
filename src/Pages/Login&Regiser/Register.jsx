@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
@@ -6,10 +6,9 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const Register = () => {
-  const { SignUp, UpdateUserData, user, setLibrarian, librarian } =
-    useContext(AuthContext);
+  const { SignUp, UpdateUserData } = useContext(AuthContext);
 
-  user;
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -17,13 +16,13 @@ const Register = () => {
     const password = form.get("password");
     const userName = form.get("name");
     const url = form.get("url");
-    const islibrarian = form.get("librarian");
+    const librarian= form.get("librarian") === 'on';
 
-    if (islibrarian === "on") {
-      setLibrarian(true);
-    } else {
-      setLibrarian(false);
-    }
+    
+
+
+
+
 
     const validPass = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (!validPass.test(password)) {
@@ -36,17 +35,18 @@ const Register = () => {
       }
     } else {
       SignUp(email, password)
-        .then( async (res) => {
+        .then((res) => {
+          console.log(res.user);
           if (res.user) {
             const user = res.user;
             const userEmail = user?.email;
             const userData = { userEmail, librarian };
-            await axios.post("http://localhost:5000/users", userData).then((res) => {
-              console.log(res.data);
+            axios.post("http://localhost:5000/users", userData).then((res2) => {
+              console.log(res2.data);
+              console.log(userData);
             });
-
             Swal.fire({
-              position: "top-end",
+              position: "center",
               icon: "success",
               title: "User has been created",
               showConfirmButton: false,

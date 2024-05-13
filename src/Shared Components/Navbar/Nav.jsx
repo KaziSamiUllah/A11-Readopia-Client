@@ -4,54 +4,37 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 const Nav = () => {
- 
-  const { user, SignOut } = useContext(AuthContext);
+  const { user, SignOut, userData } = useContext(AuthContext);
 
   const handleSingOut = () => {
     SignOut();
   };
 
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    if (user) {
-      axios.get(`http://localhost:5000/users/${user.email}`)
-        .then(res => {
-          setUserData(res.data);
-        })
-        .catch(error => {
-          console.error('Error fetching user data:', error);
-        });
-    }
-  }, [user]);
-
-
-
-const NavLinks = (
-  <>
-    <li>
-      <Link>Home</Link>
-    </li>
-    {userData?.librarian  && 
-   <>
-    <li>
-    <Link to="/allBooks">All Books</Link>
-  </li> 
-    <li>
-      <Link to="/addBooks">Add books</Link>
-    </li>
-   </>}
-    <li>
-      <Link to="borrowedBooks">Borrowed Books</Link>
-    </li>
-  </>
-);
-
-
-
+  const NavLinks = (
+    <>
+      <li>
+        <Link>Home</Link>
+      </li>
+      <li>
+        <Link to="/allBooks">All Books</Link>
+      </li>
+      {userData?.librarian && (
+        <>
+          <li>
+            <Link to="/addBooks">Add books</Link>
+          </li>
+        </>
+      )}
+      {userData && (
+        <li>
+          <Link to="borrowedBooks">Borrowed Books</Link>
+        </li>
+      )}
+    </>
+  );
 
   return (
-    <div className="px-16" >
+    <div className="px-16">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
@@ -105,7 +88,6 @@ const NavLinks = (
             className="toggle theme-controller bg-orange-300 border-sky-400 [--tglbg:theme(colors.slate.900)] checked:bg-lime-50 checked:border-red-300 checked:[--tglbg:theme(colors.orange.300)] row-start-1 col-start-1 col-span-2"
           />
           {user ? (
-
             <div className="dropdown dropdown-hover">
               <div tabIndex={0} role="button" className=" m-1">
                 <div className="w-10 mask mask-squircle">
@@ -120,11 +102,11 @@ const NavLinks = (
               </div>
               <ul
                 tabIndex={0}
-                className="right-0 dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-fit space-y-5 "
+                className="right-0 dropdown-content z-[10] menu bg-base-100 rounded-box w-fit space-y-5 p-5 shadow-md shadow-slate-500"
               >
                 <li>{user.displayName}</li>
                 <li>{user.email}</li>
-                <li>Role: {userData?.librarian? "Librarian" : "Member"} </li>
+                <li>Role: {userData?.librarian ? "Librarian" : "Member"} </li>
                 <li>
                   <button className="btn" onClick={handleSingOut}>
                     Sign Out

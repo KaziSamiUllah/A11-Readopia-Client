@@ -15,7 +15,7 @@ const BorrowedBooks = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/borrowed/${user.email}`)
+      .get(`http://localhost:5000/borrowed/${user.email}`, {withCredentials:true})
       .then((res) => {
         setBorrowed(res.data);
       })
@@ -69,7 +69,7 @@ const BorrowedBooks = () => {
 
   return (
     <div className="min-h-[calc(100vh-260px)]">
-      <h1 className="text-3xl text-center font-bold my-10">My Borroes</h1>
+      <h1 className="text-3xl text-center font-bold my-10">My Borrows</h1>
       <div>
         {borrowed.map((borrowedBook) => (
           <div key={borrowedBook._id}>

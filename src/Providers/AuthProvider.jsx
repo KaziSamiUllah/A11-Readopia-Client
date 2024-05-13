@@ -17,8 +17,9 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [librarian, setLibrarian] = useState(false);
+
   const auth = getAuth(app);
+
 
   //// Sign UP////
   const SignUp = (email, password) => {
@@ -44,11 +45,52 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  /////////////////User Role checker//////////////
+    const [userData, setUserData] = useState(null);
+  console.log(userData);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/users/${user?.email}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setUserData(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, [user]);
+
+
+
+
+
+
   //  user State (Logged in or not)
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      const userEmail = currentUser?.email || user?.email;
+      const JWTpayload = { email: userEmail };
+      if (currentUser) {
+        axios
+          .post("http://localhost:5000/jwt", JWTpayload, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log("token response", res.data);
+          });
+      } else {
+        axios
+          .post("http://localhost:5000/logout", JWTpayload, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
+      }
     });
     return () => {
       //CleanUP
@@ -57,24 +99,26 @@ const AuthProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const UpdateUserData = (userName, img) => {
     return updateProfile(auth.currentUser, {
       displayName: userName,
       photoURL: img,
     });
   };
-
-  /////////////////store user info to db///////////////
-  console.log(user);
-
-  // if (user) {
-  //   const userEmail = user.email;
-  //   const userData = { userEmail, librarian };
-  //   axios.post("http://localhost:5000/users", userData)
-  //   .then(res =>
-  //     {console.log(res.data)
-  //   });
-  // }
 
   const authInfo = {
     SignUp,
@@ -84,8 +128,7 @@ const AuthProvider = ({ children }) => {
     UpdateUserData,
     user,
     loading,
-    setLibrarian,
-    librarian,
+    userData
   };
 
   return (

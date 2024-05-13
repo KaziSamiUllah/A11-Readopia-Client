@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
-import 'animate.css';
+import "animate.css";
+import axios from "axios";
 const AddBooks = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,39 +13,42 @@ const AddBooks = () => {
     const description = form.get("description");
     const rating = form.get("rating");
 
-    const bookDetails = {url, name, quantity, author, category, description, rating}
-    
-    // ("Form submitted!", bookDetails);
+    const bookDetails = {
+      url,
+      name,
+      quantity,
+      author,
+      category,
+      description,
+      rating,
+    };
+
 
     fetch("http://localhost:5000/books", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(bookDetails),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.acknowledged === true) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Your Book has been added",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-
-            });
-
-
-
-
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookDetails),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged === true) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Book has been added",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
   };
 
   return (
     <div className="mb-10 max-w-2xl mx-auto  p-16 border-2 rounded-2xl shadow-lg animate__bounceIn">
-        <h1 className="text-center font-bold text-2xl mb-5">Add a new book</h1>
+      <h1 className="text-center font-bold text-2xl mb-5">Add a new book</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="url" className="block font-semibold">
@@ -75,7 +79,7 @@ const AddBooks = () => {
             Quantity
           </label>
           <input
-            type="number" 
+            type="number"
             name="quantity"
             className="w-full bg-white text text-black border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="Quantity"
@@ -103,7 +107,9 @@ const AddBooks = () => {
             className="w-full bg-white text text-black border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             required
           >
-            <option value="" disabled>Select a category</option>
+            <option value="" disabled>
+              Select a category
+            </option>
             <option value="Fiction">Fiction</option>
             <option value="Sports">Sports</option>
             <option value="Science Fiction">Science Fiction</option>
