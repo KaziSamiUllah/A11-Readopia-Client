@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
 import moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
+import generatePDF from 'react-to-pdf';
 
 const BookDetail = () => {
   const { user } = useContext(AuthContext);
@@ -20,7 +21,7 @@ const BookDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/books/${name}`)
+      .get(`http://localhost:5000/books/${name}`, {withCredentials:true})
       .then((res) => setBookDetails(res.data))
       .catch((error) => (error));
   }, []);
@@ -31,7 +32,7 @@ const BookDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/borrowed/${user.email}`)
+      .get(`http://localhost:5000/borrowed/${user.email}`, {withCredentials:true})
       .then((res) => {
         setBorrowed(res.data);
       })
@@ -85,7 +86,7 @@ const BookDetail = () => {
 
     const qty = "-1";
     axios
-      .put(`http://localhost:5000/books/${_id}`, { qty })
+      .put(`http://localhost:5000/books/${_id}`, { qty },{})
       .then((response) => {
         (response.data);
       })
@@ -93,10 +94,10 @@ const BookDetail = () => {
         console.error("Error:", error);
       });
   };
-
+  const targetRef = useRef();
   return (
     <div>
-      <div className="">
+      <div ref={targetRef}>
         <div className="flex flex-row p-10">
           <img className="h-[80vh]" src={url} alt={name} />
           <div className="px-6 py-4">
@@ -111,6 +112,7 @@ const BookDetail = () => {
               {description}
             </p>
             <p className=" text-base">Available: {quantity} copies</p>
+            <button onClick={() => generatePDF(targetRef, {filename: 'page.pdf'})}>Download PDF</button>
           </div>
          
           <label

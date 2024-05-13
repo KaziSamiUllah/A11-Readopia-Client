@@ -3,14 +3,10 @@ import StarRatingComponent from "../../Shared Components/StarRatingComponent";
 import { Link } from "react-router-dom";
 import Aos from "aos";
 
-const ListCard = ({ book }) => {
+const ListCard = ({ book, userData }) => {
   Aos.init();
   const { url, author, name, category, rating, _id } = book;
   return (
-    // <div
-
-    //   //   className="flex border-2 rounded-2xl  w-4/5 mx-auto justify-between items-center bg-red-100"
-    // >
     <tbody data-aos="flip-down" className=" border-b-2">
       <tr className="border-b">
         <td className="px-4 py-2 font-bold">{name}</td>
@@ -24,11 +20,15 @@ const ListCard = ({ book }) => {
             <button className="btn-warning btn btn-sm">Details</button>
           </Link>
         </td>
-        <td className="px-4 py-2">
-          <Link to={`/updateBook/${name}`} className="mx-auto">
-            <button className="btn-info btn btn-sm">Update</button>
-          </Link>
-        </td>
+        {userData?.librarian && (
+          <>
+            <td className="px-4 py-2">
+              <Link to={`/updateBook/${name}`} className="mx-auto">
+                <button className="btn-info btn btn-sm">Update</button>
+              </Link>
+            </td>
+          </>
+        )}
       </tr>
     </tbody>
   );

@@ -47,11 +47,11 @@ const AuthProvider = ({ children }) => {
 
   /////////////////User Role checker//////////////
     const [userData, setUserData] = useState(null);
-  console.log(userData);
+ 
   useEffect(() => {
     axios
       .get(`http://localhost:5000/users/${user?.email}`, {
-        withCredentials: true,
+        withCredentials: true
       })
       .then((res) => {
         setUserData(res.data);
@@ -62,6 +62,7 @@ const AuthProvider = ({ children }) => {
       });
   }, [user]);
 
+  console.log(userData);
 
 
 

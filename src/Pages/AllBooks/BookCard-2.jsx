@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import StarRatingComponent from "../../Shared Components/StarRatingComponent";
 import Aos from "aos";
 
-const BookCard2 = ({ book }) => {
+const BookCard2 = ({ book, userData }) => {
   const { url, author, name, category, rating, _id } = book;
   Aos.init();
+
+  console.log(userData)
   return (
     <div
       data-aos="zoom-out"
@@ -27,9 +29,11 @@ const BookCard2 = ({ book }) => {
           <Link to={`/bookdetail/${name}`} className="mx-auto ">
             <button className="btn-outline btn btn-sm">Details</button>
           </Link>
-          <Link to={`/updateBook/${name}`} className="mx-auto ">
-            <button className="btn-outline btn btn-sm">Update</button>
-          </Link>
+          {userData?.librarian && (
+            <Link to={`/updateBook/${name}`} className="mx-auto ">
+              <button className="btn-outline btn btn-sm">Update</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

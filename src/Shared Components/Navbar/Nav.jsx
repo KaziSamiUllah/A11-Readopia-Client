@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { useContext } from "react";
+
 
 const Nav = () => {
   const { user, SignOut, userData } = useContext(AuthContext);
