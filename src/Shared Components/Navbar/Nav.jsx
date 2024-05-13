@@ -6,6 +6,7 @@ import axios from "axios";
 const Nav = () => {
  
   const { user, SignOut } = useContext(AuthContext);
+
   const handleSingOut = () => {
     SignOut();
   };
@@ -24,7 +25,7 @@ const Nav = () => {
     }
   }, [user]);
 
-console.log(userData)
+
 
 const NavLinks = (
   <>
@@ -123,7 +124,7 @@ const NavLinks = (
               >
                 <li>{user.displayName}</li>
                 <li>{user.email}</li>
-                <li>Role: {userData?.librarian ? "Librarian" : "Member"} </li>
+                <li>Role: {userData?.librarian? "Librarian" : "Member"} </li>
                 <li>
                   <button className="btn" onClick={handleSingOut}>
                     Sign Out

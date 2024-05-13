@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/firebase.config";
-import axios, { Axios } from "axios";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -49,15 +49,6 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
-
-      if (user) {
-        const userEmail = user.email;
-        const userData = { userEmail, librarian };
-        axios.post("http://localhost:5000/users", userData)
-        .then(res => 
-          {console.log(res.data)
-        });
-      }
     });
     return () => {
       //CleanUP
@@ -80,12 +71,10 @@ const AuthProvider = ({ children }) => {
   //   const userEmail = user.email;
   //   const userData = { userEmail, librarian };
   //   axios.post("http://localhost:5000/users", userData)
-  //   .then(res => 
+  //   .then(res =>
   //     {console.log(res.data)
   //   });
   // }
-
-
 
   const authInfo = {
     SignUp,
@@ -96,7 +85,7 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     setLibrarian,
-    librarian
+    librarian,
   };
 
   return (

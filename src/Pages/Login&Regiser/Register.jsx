@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const Register = () => {
-  const { SignUp, UpdateUserData, user, setLibrarian } =
+  const { SignUp, UpdateUserData, user, setLibrarian, librarian } =
     useContext(AuthContext);
 
   user;
@@ -16,9 +17,9 @@ const Register = () => {
     const password = form.get("password");
     const userName = form.get("name");
     const url = form.get("url");
-    const librarian = form.get("librarian");
+    const islibrarian = form.get("librarian");
 
-    if (librarian == "on") {
+    if (islibrarian === "on") {
       setLibrarian(true);
     } else {
       setLibrarian(false);
@@ -35,8 +36,15 @@ const Register = () => {
       }
     } else {
       SignUp(email, password)
-        .then((res) => {
+        .then( async (res) => {
           if (res.user) {
+            const user = res.user;
+            const userEmail = user?.email;
+            const userData = { userEmail, librarian };
+            await axios.post("http://localhost:5000/users", userData).then((res) => {
+              console.log(res.data);
+            });
+
             Swal.fire({
               position: "top-end",
               icon: "success",
@@ -108,7 +116,11 @@ const Register = () => {
                 </div>
                 <div className="flex flex-col items-left gap-2">
                   <div className="flex gap-2">
-                    <input type="checkbox" name="librarian" title="Can varify by Employee ID"/>{" "}
+                    <input
+                      type="checkbox"
+                      name="librarian"
+                      title="Can varify by Employee ID"
+                    />{" "}
                     <h1 className="text-black">Are you a librarian here?</h1>
                   </div>
 
