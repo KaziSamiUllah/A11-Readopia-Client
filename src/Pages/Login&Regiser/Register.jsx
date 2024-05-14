@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -7,8 +7,7 @@ import axios from "axios";
 
 const Register = () => {
   const { SignUp, UpdateUserData } = useContext(AuthContext);
-
-
+const  Navigate = useNavigate()
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -17,12 +16,6 @@ const Register = () => {
     const userName = form.get("name");
     const url = form.get("url");
     const librarian= form.get("librarian") === 'on';
-
-    
-
-
-
-
 
     const validPass = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (!validPass.test(password)) {
@@ -41,7 +34,7 @@ const Register = () => {
             const user = res.user;
             const userEmail = user?.email;
             const userData = { userEmail, librarian };
-            axios.post("http://localhost:5000/users", userData).then((res2) => {
+            axios.post("https://readopia-server-one.vercel.app/users", userData).then((res2) => {
               console.log(res2.data);
               console.log(userData);
             });
@@ -58,6 +51,7 @@ const Register = () => {
           UpdateUserData(userName, url)
             .then(() => {
               ("Profile Updated Successfully");
+              Navigate('/');
             })
             .catch((error) => {
               toast(
@@ -66,6 +60,7 @@ const Register = () => {
               error;
             });
         });
+        
     }
   };
 

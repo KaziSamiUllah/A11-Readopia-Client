@@ -21,7 +21,7 @@ const BookDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/books/${name}`, {withCredentials:true})
+      .get(`https://readopia-server-one.vercel.app/books/${name}`, {withCredentials:true})
       .then((res) => setBookDetails(res.data))
       .catch((error) => (error));
   }, []);
@@ -32,7 +32,7 @@ const BookDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/borrowed/${user.email}`, {withCredentials:true})
+      .get(`https://readopia-server-one.vercel.app/borrowed/${user.email}`, {withCredentials:true})
       .then((res) => {
         setBorrowed(res.data);
       })
@@ -68,7 +68,7 @@ const BookDetail = () => {
     };
 
     axios
-      .post("http://localhost:5000/borrowed", currentBook, {
+      .post("https://readopia-server-one.vercel.app/borrowed", currentBook, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -86,7 +86,7 @@ const BookDetail = () => {
 
     const qty = "-1";
     axios
-      .put(`http://localhost:5000/books/${_id}`, { qty },{})
+      .put(`https://readopia-server-one.vercel.app/books/${_id}`, { qty },{})
       .then((response) => {
         (response.data);
       })
@@ -112,7 +112,7 @@ const BookDetail = () => {
               {description}
             </p>
             <p className=" text-base">Available: {quantity} copies</p>
-            <button onClick={() => generatePDF(targetRef, {filename: 'page.pdf'})}>Download PDF</button>
+            {/* <button onClick={() => generatePDF(targetRef, {filename: 'page.pdf'})}>Download PDF</button> */}
           </div>
          
           <label

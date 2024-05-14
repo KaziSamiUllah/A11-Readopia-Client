@@ -15,7 +15,7 @@ const BorrowedBooks = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/borrowed/${user.email}`, {withCredentials:true})
+      .get(`https://readopia-server-one.vercel.app/borrowed/${user.email}`, {withCredentials:true})
       .then((res) => {
         setBorrowed(res.data);
       })
@@ -38,7 +38,7 @@ const BorrowedBooks = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .put(`http://localhost:5000/books/${book_id}`, { qty })
+          .put(`https://readopia-server-one.vercel.app/books/${book_id}`, { qty })
           .then((response) => {
             response.data;
           })
@@ -47,7 +47,7 @@ const BorrowedBooks = () => {
           });
 
         axios
-          .delete(`http://localhost:5000/borrowed/${id}`)
+          .delete(`https://readopia-server-one.vercel.app/borrowed/${id}`)
           .then((response) => {
             "Delete operation successful", response;
           })

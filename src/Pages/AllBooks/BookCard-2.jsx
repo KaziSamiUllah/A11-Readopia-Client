@@ -20,7 +20,6 @@ const BookCard2 = ({ book, userData }) => {
         <h1 className="text-xl font-bold">{name}</h1>
         <h1>Author:{author}</h1>
         <h1>Category: {category}</h1>
-        <h1>Quantity:</h1>
       </div>
 
       <div className="flex flex-col gap-5">

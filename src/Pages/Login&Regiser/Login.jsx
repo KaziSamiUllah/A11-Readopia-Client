@@ -28,11 +28,12 @@ const Login = () => {
     .then((res)=>{
       ( res.user?.displayName)
         toast(`welcome back ${res.user?.displayName}`)
+        Navigate('/')
     })
     .catch(error=>{ 
       toast(error.message)
     })
-
+    
   };
 
   const handleGoogleLogIn = () => {

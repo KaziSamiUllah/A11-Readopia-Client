@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
  
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users/${user?.email}`, {
+      .get(`https://readopia-server-one.vercel.app/users/${user?.email}`, {
         withCredentials: true
       })
       .then((res) => {
@@ -77,7 +77,7 @@ const AuthProvider = ({ children }) => {
       const JWTpayload = { email: userEmail };
       if (currentUser) {
         axios
-          .post("http://localhost:5000/jwt", JWTpayload, {
+          .post("https://readopia-server-one.vercel.app/jwt", JWTpayload, {
             withCredentials: true,
           })
           .then((res) => {
@@ -85,7 +85,7 @@ const AuthProvider = ({ children }) => {
           });
       } else {
         axios
-          .post("http://localhost:5000/logout", JWTpayload, {
+          .post("https://readopia-server-one.vercel.app/logout", JWTpayload, {
             withCredentials: true,
           })
           .then((res) => {

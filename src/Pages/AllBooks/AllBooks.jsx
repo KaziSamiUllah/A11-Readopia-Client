@@ -15,7 +15,7 @@ const AllBooks = () => {
 
   useState(() => {
     axios
-      .get("http://localhost:5000/books", { withCredentials: true })
+      .get("https://readopia-server-one.vercel.app/books", { withCredentials: true })
       .then((res) => {
         setAllBooks(res.data);
         setShowBooks(res.data);

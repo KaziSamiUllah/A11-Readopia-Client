@@ -9,7 +9,7 @@ const CategoryDetails = () => {
     const [thisCategory, setThisCategory] = useState([])
       
     useEffect(() => {
-          axios.get(`http://localhost:5000/categories/${name}`)
+          axios.get(`https://readopia-server-one.vercel.app/categories/${name}`)
           .then(res => {
             setThisCategory(res.data);
           })

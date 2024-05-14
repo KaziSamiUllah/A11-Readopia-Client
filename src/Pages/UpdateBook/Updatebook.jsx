@@ -8,11 +8,11 @@ const Updatebook = () => {
   const [updateDetails, setUpdate] = useState({});
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/books/${name}`)
+   axios
+      .get(`https://readopia-server-one.vercel.app/books/${name}`,{withCredentials: true})
       .then((res) => setUpdate(res.data))
       .catch((error) => (error));
-  }, []);
+  }, [name]);
   
   const {_id, url, author, category, quantity, description, rating } = updateDetails;
 
@@ -42,7 +42,7 @@ const Updatebook = () => {
     };
 
 
-    axios.put(`http://localhost:5000/books/${_id}`, formUpdate)
+    axios.put(`https://readopia-server-one.vercel.app/books/${_id}`, formUpdate)
       .then((response) => {
         (response.data)
         if(response.data.acknowledged == true)
@@ -69,7 +69,7 @@ const Updatebook = () => {
 
   return (
     <div className="max-w-2xl mx-auto  p-16 border-2 rounded-2xl shadow-lg animate__bounceIn">
-      <h1 className="text-center font-bold text-2xl mb-5">Add a new book</h1>
+      <h1 className="text-center font-bold text-2xl mb-5">Update Book info</h1>
       <form onSubmit={handleUpdate} className="space-y-4">
         <div>
           <label htmlFor="url" className="block font-semibold">

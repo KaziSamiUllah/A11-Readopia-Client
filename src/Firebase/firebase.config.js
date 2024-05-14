@@ -5,13 +5,15 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDnLcbF4rxIDGNScSVKRQMOIZpg4zBnWAE",
-  authDomain: "readopia-a11-t008.firebaseapp.com",
-  projectId: "readopia-a11-t008",
-  storageBucket: "readopia-a11-t008.appspot.com",
-  messagingSenderId: "451368359571",
-  appId: "1:451368359571:web:59034aab4174430dc31f66"
+  apiKey:import.meta.env.VITE_apiKey,
+  authDomain:import.meta.env.VITE_authDomain,
+  projectId:import.meta.env.VITE_projectId,
+  storageBucket:import.meta.env.VITE_storageBucket,
+  messagingSenderId:import.meta.env.VITE_messagingSenderId,
+  appId:import.meta.env.VITE_appId,
 };
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

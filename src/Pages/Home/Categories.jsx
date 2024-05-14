@@ -11,7 +11,7 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/categories")
+      .get("https://readopia-server-one.vercel.app/categories")
       .then((res) => {
         setCategories(res.data);
       })
