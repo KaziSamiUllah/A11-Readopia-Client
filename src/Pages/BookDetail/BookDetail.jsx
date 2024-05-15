@@ -2,10 +2,9 @@ import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { toast } from "react-toastify";
 import moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
-
+import Swal from "sweetalert2";
 
 const BookDetail = () => {
   const { user } = useContext(AuthContext);
@@ -15,24 +14,23 @@ const BookDetail = () => {
   const [borrowBtn, setBorrowBtn] = useState(true);
   const [borrowed, setBorrowed] = useState([]);
 
-
-
-
-
   useEffect(() => {
     axios
-      .get(`https://readopia-server-one.vercel.app/books/${name}`, {withCredentials:true})
+      .get(`https://readopia-server-one.vercel.app/books/${name}`, {
+        withCredentials: true,
+      })
       .then((res) => setBookDetails(res.data))
-      .catch((error) => (error));
+      .catch((error) => error);
   }, []);
 
   const { _id, url, author, category, description, quantity, rating } =
     bookDetails;
 
-
   useEffect(() => {
     axios
-      .get(`https://readopia-server-one.vercel.app/borrowed/${user.email}`, {withCredentials:true})
+      .get(`https://readopia-server-one.vercel.app/borrowed/${user.email}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setBorrowed(res.data);
       })
@@ -43,12 +41,10 @@ const BookDetail = () => {
 
   const isBorrowed = borrowed.find((borrow) => borrow.book_id === _id);
   useEffect(() => {
-    if (isBorrowed || bookDetails.quantity<=0) {
+    if (isBorrowed || bookDetails.quantity <= 0) {
       setBorrowBtn(false);
     }
-  }, [isBorrowed , bookDetails.quantity, user ]);
-
-
+  }, [isBorrowed, bookDetails.quantity, user]);
 
   const handleBorrow = (e) => {
     const form = new FormData(e.currentTarget);
@@ -66,31 +62,34 @@ const BookDetail = () => {
       returnOn,
       issuedOn,
     };
-    console.log(currentBook)
+    console.log(currentBook);
 
     axios
-      .post("https://readopia-server-one.vercel.app/borrowed", currentBook,{  
-      headers: {
+      .post("https://readopia-server-one.vercel.app/borrowed", currentBook, {
+        headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         if (response.data.acknowledged === true) {
-          toast("Saved Successfully");
-          (response.data);
+          // toast("Saved Successfully");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Book has been issued for borrow",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
 
-
     const qty = "-1";
     axios
-      .put(`https://readopia-server-one.vercel.app/books/${_id}`, { qty },{})
-      .then((response) => {
-        (response.data);
-      })
+      .put(`https://readopia-server-one.vercel.app/books/${_id}`, { qty }, {})
+      .then(() => {})
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -115,14 +114,14 @@ const BookDetail = () => {
             <p className=" text-base">Available: {quantity} copies</p>
             {/* <button onClick={() => generatePDF(targetRef, {filename: 'page.pdf'})}>Download PDF</button> */}
           </div>
-         
+
           <label
             htmlFor="my_modal_6"
             className={`btn btn-info text-lg font-bold ${
               borrowBtn ? "" : "pointer-events-none"
             }`}
           >
-            <h1 className={`${borrowBtn? '' : 'text-red-400'}`}>Borrow</h1>
+            <h1 className={`${borrowBtn ? "" : "text-red-400"}`}>Borrow</h1>
           </label>
         </div>
       </div>
