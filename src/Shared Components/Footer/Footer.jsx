@@ -1,7 +1,6 @@
 const Footer = () => {
   return (
     <footer className="footer p-10 bg-neutral text-neutral-content h-60">
-      <footer className="footer items-center p-4 bg-neutral text-neutral-content">
         <aside className="items-center grid-flow-col">
           <img
             className="bg-orange-300 rounded-xl"
@@ -9,11 +8,11 @@ const Footer = () => {
             alt=""
           />
           <div>
-            <p className="text-xl"><span className="briem-hand">Readopia</span> online library</p>
+            <p className="text-xl"><span className="briem-hand">Readopia</span> official library of <span className="text-xl text-amber-600 font-bold ">9.59 Minute School</span> </p>
             <p>Copyright © 2024 - All right reserved</p>
           </div>
         </aside>
-        <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+        <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end mx-auto">
           <a>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +47,7 @@ const Footer = () => {
             </svg>
           </a>
         </nav>
-      </footer>
+  
     </footer>
   );
 };

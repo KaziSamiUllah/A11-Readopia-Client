@@ -65,7 +65,7 @@ const  Navigate = useNavigate()
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-[calc(100vh-240px)]">
       <div className="flex-grow">
         <div>
           <div className=" lg:p-14 h-[68vh]">

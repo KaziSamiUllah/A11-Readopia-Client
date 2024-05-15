@@ -47,6 +47,7 @@ const AddBooks = () => {
   };
 
   return (
+    <div className="min-h-[calc(100vh-224px)]">
     <div className="mb-10 max-w-2xl mx-auto  p-16 border-2 rounded-2xl shadow-lg animate__bounceIn">
       <h1 className="text-center font-bold text-2xl mb-5">Add a new book</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -111,7 +112,7 @@ const AddBooks = () => {
               Select a category
             </option>
             <option value="Fiction">Fiction</option>
-            <option value="Sports">Sports</option>
+            <option value="Sports" >Sports</option>
             <option value="Science Fiction">Science Fiction</option>
             <option value="Mystery">Mystery</option>
             <option value="Fantasy">Fantasy</option>
@@ -155,6 +156,7 @@ const AddBooks = () => {
       <div className="mt-4">
         <p>Some contents/texts about the book (could be static)</p>
       </div>
+    </div>
     </div>
   );
 };

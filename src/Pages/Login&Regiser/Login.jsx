@@ -42,7 +42,7 @@ const Login = () => {
 
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-[calc(100vh-240px)]">
       <div className="flex-grow">
         <div className="lg:p-14 ">
           <div className=" animate__bounceIn mx-auto p-8 bg-slate-100 rounded-xl shadow-lg  max-w-lg ">

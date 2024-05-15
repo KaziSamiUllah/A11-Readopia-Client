@@ -5,7 +5,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
 import moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
-import generatePDF from 'react-to-pdf';
+
 
 const BookDetail = () => {
   const { user } = useContext(AuthContext);
@@ -39,20 +39,20 @@ const BookDetail = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [user]);
 
   const isBorrowed = borrowed.find((borrow) => borrow.book_id === _id);
   useEffect(() => {
     if (isBorrowed || bookDetails.quantity<=0) {
       setBorrowBtn(false);
     }
-  }, [isBorrowed , bookDetails.quantity ]);
+  }, [isBorrowed , bookDetails.quantity, user ]);
 
 
 
   const handleBorrow = (e) => {
     const form = new FormData(e.currentTarget);
-    const returnOn = form.get("date");
+    const returnOn = form.get("returnDate");
     const borrowedBy = user.displayName;
     const email = user.email;
     const currentBook = {
@@ -66,10 +66,11 @@ const BookDetail = () => {
       returnOn,
       issuedOn,
     };
+    console.log(currentBook)
 
     axios
-      .post("https://readopia-server-one.vercel.app/borrowed", currentBook, {
-        headers: {
+      .post("https://readopia-server-one.vercel.app/borrowed", currentBook,{  
+      headers: {
           "Content-Type": "application/json",
         },
       })
@@ -98,8 +99,8 @@ const BookDetail = () => {
   return (
     <div>
       <div ref={targetRef}>
-        <div className="flex flex-row p-10">
-          <img className="h-[80vh]" src={url} alt={name} />
+        <div className="flex flex-row p-10 min-h-[calc(100vh-240px)]">
+          <img className="h-[65vh]" src={url} alt={name} />
           <div className="px-6 py-4">
             <h1 className="font-bold text-xl ">Title:{name}</h1>
             <h1 className="text-lg mb-2">-{author}</h1>
@@ -135,9 +136,9 @@ const BookDetail = () => {
           <form onSubmit={handleBorrow}>
             <h1>Name: {user?.displayName}</h1>
             <h1>Email: {user?.email}</h1>
-            <label htmlFor="">
+            <label>
               Return Date:
-              <input name="date" type="date" />
+              <input name="returnDate" type="date" />
             </label>
             <div className="flex flex-row justify-between  items-center mt-5">
               <button

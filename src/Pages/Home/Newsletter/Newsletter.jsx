@@ -5,7 +5,7 @@ const Newsletter = () => {
     const {user} = useContext(AuthContext)
   return (
     <div className="rounded-2xl bg-[url('https://c1.wallpaperflare.com/preview/791/207/698/dark-gloomy-books-pages.jpg')]  bg-opacity-20 bg-center">
-    <div className=" rounded-lg shadow-md p-10 m-10 text-white w-1/2 mx-auto text-center">
+    <div className=" rounded-lg shadow-md p-5 lg:p-10 lg:m-10 text-white w-full lg:w-1/2 mx-auto text-center my-5">
       <h2 className="text-3xl font-bold mb-2">Subscribe to Our Newsletter</h2>
       <p className=" mb-4">Stay updated with our latest books, events, and news!</p>
       <form className="flex items-center" action="#" method="post">

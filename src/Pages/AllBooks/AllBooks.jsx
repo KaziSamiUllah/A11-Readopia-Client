@@ -13,6 +13,7 @@ const AllBooks = () => {
   const [showBooks, setShowBooks] = useState([]);
   const { userData } = useContext(AuthContext);
 
+
   useState(() => {
     axios
       .get("https://readopia-server-one.vercel.app/books", { withCredentials: true })
@@ -40,7 +41,7 @@ const AllBooks = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[calc(100vh-240)]">
       <h1 className="text-center text-3xl font-bold">All Books</h1>
       <div className=" flex justify-between items-center ">
         <button
@@ -64,7 +65,7 @@ const AllBooks = () => {
       </div>
       <div className="my-10">
         {isGridView ? (
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-5 m-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 m-5">
             {showBooks.map((book) => (
               <BookCard2
                 key={book._id}

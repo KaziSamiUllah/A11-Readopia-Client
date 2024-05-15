@@ -6,7 +6,7 @@ const BookCard2 = ({ book, userData }) => {
   const { url, author, name, category, rating, _id } = book;
   Aos.init();
 
-  console.log(userData)
+
   return (
     <div
       data-aos="zoom-out"

@@ -73,10 +73,10 @@ const LibraryServices = () => {
   ];
 
   return (
-    <div className="bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/72/NYC_-_New_York_City_Library_-_1723.jpg')] bg-cover border-2 rounded-2xl">
+    <div className="bg-center bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/72/NYC_-_New_York_City_Library_-_1723.jpg')] bg-cover border-2 rounded-2xl">
       <div className="bg-black rounded-2xl bg-opacity-20 p-10 text-white">
       <h1 className="text-4xl font-bold text-center mb-5 text-white">Our services</h1>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid lg:grid-cols-2 gap-4">
         {services.map((service, index) => (
           <div key={index} className="bg-opacity-60 p-4 shadow-lg shadow-black rounded-md bg-black drop-shadow-lg hover:border-2 hover:bg-opacity-70">
             <h3 className="text-lg font-semibold mb-2">{service.name}</h3>

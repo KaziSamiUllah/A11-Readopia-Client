@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext } from "react";
 
-
 const Nav = () => {
-  const { user, SignOut, userData } = useContext(AuthContext);
+  const { user, SignOut, userData} = useContext(AuthContext);
+
+  // console.log(!loading)
+  // console.log(userData);
 
   const handleSingOut = () => {
     SignOut();
@@ -25,7 +27,7 @@ const Nav = () => {
           </li>
         </>
       )}
-      {userData && (
+      {user && (
         <li>
           <Link to="borrowedBooks">Borrowed Books</Link>
         </li>
@@ -34,7 +36,7 @@ const Nav = () => {
   );
 
   return (
-    <div className="px-16">
+    <div className="lg:px-16">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
@@ -56,7 +58,7 @@ const Nav = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52"
             >
               {NavLinks}
             </ul>
@@ -126,3 +128,6 @@ const Nav = () => {
 };
 
 export default Nav;
+
+
+

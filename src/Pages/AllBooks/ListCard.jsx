@@ -17,18 +17,17 @@ const ListCard = ({ book, userData }) => {
         </td>
         <td className="px-4 py-2">
           <Link to={`/bookdetail/${name}`} className="mx-auto">
-            <button className="btn-warning btn btn-sm">Details</button>
+            <button className="btn-warning btn btn-sm m-2">Details</button>
           </Link>
-        </td>
+       
         {userData?.librarian && (
-          <>
-            <td className="px-4 py-2">
+        
               <Link to={`/updateBook/${name}`} className="mx-auto">
-                <button className="btn-info btn btn-sm">Update</button>
+                <button className="btn-info btn btn-sm m-2">Update</button>
               </Link>
-            </td>
-          </>
+           
         )}
+         </td>
       </tr>
     </tbody>
   );

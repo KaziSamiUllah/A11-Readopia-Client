@@ -4,6 +4,7 @@ const Error = () => {
             <img src="https://media1.tenor.com/m/swTDQJ85dDEAAAAC/aaaa.gif" alt="" />
            
         </div>
+      
     );
 };
 

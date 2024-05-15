@@ -57,7 +57,7 @@ const Categories = () => {
       <div className="font-bold text-4xl text-center mt-10 ">
         <TypingEffect text={text} wordArray={wordArray}></TypingEffect>
       </div>
-      <div className="grid grid-cols-4 gap-5 p-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-10">
         {categories.map((category, idx) => (
           <div key={idx} data-aos="zoom-in">
             <Link to={`categories/${category.name}`}>

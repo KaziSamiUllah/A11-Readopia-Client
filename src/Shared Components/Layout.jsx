@@ -8,7 +8,7 @@ const Layout = () => {
     <>
       <ToastContainer></ToastContainer>
       <Nav></Nav>
-      <div className="montserrat mx-20">
+      <div className="montserrat mx-2 lg:mx-20">
         <Outlet></Outlet>
       </div>
 
