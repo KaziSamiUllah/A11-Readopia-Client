@@ -20,7 +20,6 @@ const AuthProvider = ({ children }) => {
 
   const auth = getAuth(app);
 
-
   //// Sign UP////
   const SignUp = (email, password) => {
     setLoading(true);
@@ -46,8 +45,8 @@ const AuthProvider = ({ children }) => {
   };
 
   /////////////////User Role checker//////////////
-    const [userData, setUserData] = useState(null);
- 
+   const [userData, setUserData] = useState(null);
+
   useEffect(() => {
     axios
       .get(`https://readopia-server-one.vercel.app/users/${user?.email}`, {
@@ -64,10 +63,6 @@ const AuthProvider = ({ children }) => {
 
   console.log(userData);
 
-
-
-
-
   //  user State (Logged in or not)
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -75,6 +70,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
       const userEmail = currentUser?.email || user?.email;
       const JWTpayload = { email: userEmail };
+
       if (currentUser) {
         axios
           .post("https://readopia-server-one.vercel.app/jwt", JWTpayload, {
@@ -100,20 +96,6 @@ const AuthProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const UpdateUserData = (userName, img) => {
     return updateProfile(auth.currentUser, {
       displayName: userName,
@@ -129,7 +111,7 @@ const AuthProvider = ({ children }) => {
     UpdateUserData,
     user,
     loading,
-    userData
+    userData,
   };
 
   return (

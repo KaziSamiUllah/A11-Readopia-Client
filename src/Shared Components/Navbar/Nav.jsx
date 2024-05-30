@@ -25,6 +25,10 @@ const Nav = () => {
           <li>
             <Link to="/addBooks">Add books</Link>
           </li>
+          <li>
+            <Link to="/allUsers">All Users</Link>
+          </li>
+
         </>
       )}
       {user && (

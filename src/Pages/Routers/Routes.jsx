@@ -12,6 +12,7 @@ import BookDetail from "../BookDetail/BookDetail";
 import PrivateRoutes from "./PrivateRoutes";
 import Updatebook from "../UpdateBook/Updatebook";
 import Error from "../Error";
+import Allusers from "../AllUsers/Allusers";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,22 @@ const router = createBrowserRouter([
           <PrivateRoutes>
             <AllBooks></AllBooks>
           </PrivateRoutes>
-        ),
+        )},
+        {
+          path: "/allUsers",
+          element: 
+            <PrivateRoutes>
+              <Allusers></Allusers> 
+            </PrivateRoutes>
+                  ,
+        },
+      {
+        path: "/allUsers",
+        element: 
+          <PrivateRoutes>
+            <Allusers></Allusers> 
+          </PrivateRoutes>
+                ,
       },
       {
         path: "/addBooks",
