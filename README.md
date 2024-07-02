@@ -38,5 +38,7 @@ Welcome to Readopia, the premier school library website 9.59 Minute School Libra
   
 - **User-friendly Interface:** Enjoy a seamless browsing experience across all devices with our fully responsive design, making it easy to navigate the library's collection and services from desktops, tablets, or smartphones.
 
+<p>Server repository: https://github.com/KaziSamiUllah/A11-Readopia-Server</p>
+
 
 [Note: You can register as a Librarian by checking the "Are you a librarian?" box. Only a librarian can add or update a book as the corresponding buttons are only visible to him/her. Once a user is logged in, it may take one or two reload to load the user role and nav links, also might take several retries for the "Borrow" button to work(I'm working on the solution)]
